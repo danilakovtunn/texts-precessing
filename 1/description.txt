@@ -35,30 +35,29 @@ COLOR_REGEXP = fr'{RGB}|{HEX}|{HSL}'
 
 Упражнение 3
 Целью данной подзадачи является создание регулярного выражения, способного разбить строку, содержащую математическое выражение, на токены (элементарные части) и определить тип этих токенов
+VARIABLE && FUNCS && CONSTS содержат \b с обоих концов
 1) Зададим регулярные выражения для поиска перечень констант и функций для удобства
 CONSTS = r'pi|e|sqrt2|ln2|ln10'
 FUNCS = r'sin|cos|tg|ctg|tan|cot|sinh|cosh|th|cth|tanh|coth|ln|lg|log|exp|sqrt|cbrt|abs|sign'
 2) Переменная
-[a-z_](?:[a-zA-Z_0-9])* регулярное выражение для поиска всех переменных (consts и funcs тоже ищутся)
-Поэтому зададим доп условие на то, что переменная это то, что начинается с CONSTS И FUNCS + какой-то символ
-VARIABLE = fr'(?P<variable>(?!({CONSTS}|{FUNCS})(?![a-zA-Z_0-9]))[a-z_](?:[a-zA-Z_0-9])*)'
+[a-zA-Z_](?:[a-zA-Z_0-9])* регулярное выражение для поиска всех переменных (consts и funcs тоже ищутся)
+VARIABLE = fr'(?P<variable>\b[a-zA-Z_](?:[a-zA-Z_0-9])*\b)'
 3) Константа числовая
-NUMBER = r'(?P<number>
+NUMBER = r'(?P<number>\b
                 (0|[1-9](?:[0-9])*) - неотрицательное число
                 (?:\.(?:[0-9])*[1-9])? - возможная целая часть
-           )'
+           \b)'
 4) Константы CONSTS
-CONSTANT = fr'(?P<constant>{CONSTS})'
+CONSTANT = fr'(?P<constant>\b({CONSTS})\b)'
 5) Названия функций FUNCS
-FUNCTION = fr'(?P<function>{FUNCS})'
+FUNCTION = fr'(?P<function>\b({FUNCS})\b)'
 6) Перечень операторов
 OPERATOR = r'(?P<operator>\^|\*|/|-|\+)'
 7) Виды скобок
 LEFT_PAR = r'(?P<left_parenthesis>\()'
 RIGHT_PAR = r'(?P<right_parenthesis>\))'
-8) Осталось расставить в правильном порядке. 
-Следующий порядок дает наиболее высокую точность
-EXPRESSION_REGEXP = fr'{VARIABLE}|{NUMBER}|{CONSTANT}|{FUNCTION}|{OPERATOR}|{LEFT_PAR}|{RIGHT_PAR}'
+8) Осталось перечислить выражения
+EXPRESSION_REGEXP = fr'{FUNCTION}|{CONSTANT}|{NUMBER}|{OPERATOR}|{LEFT_PAR}|{RIGHT_PAR}|{VARIABLE}'
 
 
 Упражнение 4

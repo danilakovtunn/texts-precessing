@@ -13,21 +13,21 @@ COLOR_REGEXP = fr'{RGB}|{HEX}|{HSL}'
 # 3 упражнение
 CONSTS = r'pi|e|sqrt2|ln2|ln10'
 FUNCS = r'sin|cos|tg|ctg|tan|cot|sinh|cosh|th|cth|tanh|coth|ln|lg|log|exp|sqrt|cbrt|abs|sign'
-VARIABLE = fr'(?P<variable>(?!({CONSTS}|{FUNCS})(?![a-zA-Z_0-9]))[a-z_](?:[a-zA-Z_0-9])*)'
-NUMBER = r'(?P<number>(0|[1-9](?:[0-9])*)(?:\.(?:[0-9])*[1-9])?)'
-CONSTANT = fr'(?P<constant>{CONSTS})'
-FUNCTION = fr'(?P<function>{FUNCS})'
+VARIABLE = fr'(?P<variable>\b[a-zA-Z_](?:[a-zA-Z_0-9])*\b)'
+NUMBER = r'(?P<number>\b(0|[1-9](?:[0-9])*)(?:\.(?:[0-9])*[1-9])?\b)'
+CONSTANT = fr'(?P<constant>\b({CONSTS})\b)'
+FUNCTION = fr'(?P<function>\b({FUNCS})\b)'
 OPERATOR = r'(?P<operator>\^|\*|/|-|\+)'
 LEFT_PAR = r'(?P<left_parenthesis>\()'
 RIGHT_PAR = r'(?P<right_parenthesis>\))'
-EXPRESSION_REGEXP = fr'{VARIABLE}|{NUMBER}|{CONSTANT}|{FUNCTION}|{OPERATOR}|{LEFT_PAR}|{RIGHT_PAR}'
+EXPRESSION_REGEXP = fr'{FUNCTION}|{CONSTANT}|{NUMBER}|{OPERATOR}|{LEFT_PAR}|{RIGHT_PAR}|{VARIABLE}'
 
 # 4 упражнение
 NUM_28 = r'(0?[1-9]|1[0-9]|2[0-8])'
 NUM_30 = r'(0?[1-9]|[1-2][0-9]|30)'
 NUM_31 = fr'({NUM_30}|31)'
-NUM_12_31 = r'(0?[13578]|1[02])' #1,3,5,7,8,10,12
-NUM_12_30 = r'(0?[469]|11)' #4,6,9,11
+NUM_12_31 = r'(0?[13578]|1[02])'
+NUM_12_30 = r'(0?[469]|11)'
 NUM_12_28 = r'(0?2)'
 YEAR = r'([1-9]\d*|0)'
 MONTH_RUS_28 = r'(февраля)'
